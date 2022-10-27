@@ -294,10 +294,12 @@ void actualizarMEF(estadoMEF *punteroEstadoActual) {
           if (dataFile) {
             dataFile.println(fraseSensorActivado1);
             dataFile.close(); //lo cerramos
+            
           }
           else {
             Serial.println("error al abrir siernaActivada.txt y subir que se detecto movimeinto del sensor 1");
           }
+         banderaSirena = true
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -325,6 +327,7 @@ void actualizarMEF(estadoMEF *punteroEstadoActual) {
           else {
             Serial.println("error al abrir siernaActivada.txt y subir que se detecto movimeinto del sensor 2");
           }
+          banderaSirena = true
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if PIR_3 == HIGH{
@@ -350,6 +353,7 @@ void actualizarMEF(estadoMEF *punteroEstadoActual) {
           else {
             Serial.println("error al abrir siernaActivada.txt y subir que se detecto movimeinto del sensor 3");
           }
+          banderaSirena = true
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if PIR_4 == HIGH{
@@ -375,6 +379,7 @@ void actualizarMEF(estadoMEF *punteroEstadoActual) {
           else {
             Serial.println("error al abrir siernaActivada.txt y subir que se detecto movimeinto del sensor 4");
           }
+          banderaSirena = true
         }
 
 
@@ -386,9 +391,10 @@ void actualizarMEF(estadoMEF *punteroEstadoActual) {
 
 
 
-        if (miliSegundos >= 1000) {
+        if (banderaSirena == true) {
           miliSegundos = 0;
-          *punteroEstadoActual = alarmaDesactivada;  //NOSOTROS LE TENEMOS QUE DAR AL USUARIO 5 SEGUNDOS PARA QUE SE VAYA DE LA CASA
+          *punteroEstadoActual = sirenaActivada;  //NOSOTROS LE TENEMOS QUE DAR AL USUARIO 5 SEGUNDOS PARA QUE SE VAYA DE LA CASA
+          banderaSirena = false
         }
 
         break;
